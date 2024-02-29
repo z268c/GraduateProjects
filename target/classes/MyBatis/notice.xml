@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.library.dao.NoticeDao">
+ 	<insert id="addNotice" parameterType="com.library.bean.Notice">
+        insert into notice values
+        (null, #{content}, #{publish_time}, #{publish_human})
+    </insert>
+    <delete id="deleteNotice" parameterType="long">
+        delete from notice where N_id = #{N_id}
+    </delete>
+    <!--  -->
+    <select id="getNotice" resultType="com.library.bean.Notice" parameterType="long">
+        select * from notice where N_id = #{N_id}
+    </select>
+    
+   <!--   <select id="getAllNotice" resultType="com.library.bean.Notice">
+        select * from book_info
+    </select> -->
+     <select id="queryBook" resultType="com.library.bean.Notice" parameterType="String">
+        select * from notice where content like #{search}
+        or publish_time like #{search} or publish_human like #{search}
+    </select>
+    <select id="matchBook" resultType="int" parameterType="String">
+        select count(*) from notice where content like #{search}
+        or publish_time like #{search} or publish_human like #{search}
+    </select>
+    <select id="NoticeList" resultType="com.library.bean.Notice">
+        select * from notice
+    </select>
+        <select id="myNoticeList" resultType="com.library.bean.Notice" parameterType="long">
+        select * from notice where publish_huamn = #{publish_huamn}
+    </select>
+ 
+</mapper>
